@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "NomadWheater",
-    "slug": "NomadWheater",
+    "name": "NomadWeather",
+    "slug": "NomadWeather",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
