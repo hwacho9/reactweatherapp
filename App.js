@@ -1,18 +1,39 @@
+import * as Location from 'expo-location';
 import { StatusBar } from 'expo-status-bar';
+import React, { useEffect, useState } from 'react';
 import { Dimensions, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 const { width:SCREEN_WIDTH} = Dimensions.get("window");
 //kwno screen width size
 
-console.log(SCREEN_WIDTH)
+// console.log(SCREEN_WIDTH)
 export default function App() {
-  
-  return (
+  const [city, setCity] = useState("loading,,,")
+  const [location, setLocation] = useState();
+  const [ok, setOk] = useState(true);
+  const getWeather = async() => {
+    const permission = await Location.requestForegroundPermissionsAsync(); // request location permission
+    console.log(permission)
     
+    if (!permission.granted) { // granted 가 아니라면 
+      setOk(false);
+    } 
+
+    const {coords:{latitude,longitude}} = await Location.getCurrentPositionAsync({accuracy:5});
+    const location = await Location.reverseGeocodeAsync({latitude, longitude}, {useGoogleMaps:false});
+    setCity(location[0].city)
+    console.log(location)
+  }
+
+  useEffect(()=>{
+    getWeather();
+  }, [])
+
+  return ( 
       <View style={styles.container}>
         <StatusBar style='light'/>
         <View style={styles.city}>
-          <Text style={styles.cityName}>Seoul</Text>
+          <Text style={styles.cityName}>{city}</Text>
         </View>
         <ScrollView pagingEnabled showsHorizontalScrollIndicator={false} horizontal contentContainerStyle={styles.weather}>
           <View style={styles.day}>
