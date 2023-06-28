@@ -6,7 +6,13 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint:fix": "eslint . --fix --ignore-path .gitignore --ext .js,jsx,.ts,.tsx",
+    "format": "prettier --write './**/*.{js,jsx,ts,tsx,json}'",
+    "eject": "expo eject",
+    "lint": "eslint './src/**/*.{js,ts,tsx}'",
+    "format:fix": "prettier --write ./src",
+    "prepare": "husky install"
   },
   "dependencies": {
     "expo": "~48.0.18",
